@@ -7,23 +7,24 @@ namespace FightGame
         static void Main(string[] args)
         {
 
-            User user = new User(100, new Sword(12), new BowArrow(10), new BattleStaff(12));
-            Monster monster = new Monster(100, 10);
+            User user = new User(new Sword (10), new BowArrow(8), new BattleStaff(12));
+            Monster monster = new Monster(100, 12);
+            Random random = new Random();
            
-            bool userPlay = true;
+            bool gameOver = false;
+            bool userTurn = true;
 
-            while (user.Health > 0 && monster.Health > 0)
+            while (!gameOver)
             {
-                if (userPlay)
+                if (userTurn)
                 {
                     Console.WriteLine("Are you ready to be a brave warrior?\n");
                     Console.WriteLine("What would you like to do?");
                     Console.WriteLine("1. Here are the instructions to the game.");
-                    Console.WriteLine("2. Attack with sword!");
+                    Console.WriteLine("2. Attack with Sword!");
                     Console.WriteLine("3. Attack with BowArrow!");
                     Console.WriteLine("4. Attack with BattleStaff!");
-                    Console.WriteLine("5. Check the status of your health and the monster health.");
-                    Console.WriteLine("6. Exit Game.");
+                    Console.WriteLine("5. Exit Game.");
 
                     string userChoice = Console.ReadLine().ToLower();
                     Console.Clear();
@@ -35,19 +36,22 @@ namespace FightGame
                             break;
                       
                         case "2":
+                            user.Attack(user.Sword, monster);
+                            Console.WriteLine($"Health of monster: {monster.Health}");
                             break;
                        
                         case "3":
+                            user.Attack(user.BowNArrow, monster);
+                            Console.WriteLine($"Health of monster: {monster.Health}");
                             break;
                        
                         case "4":
+                            user.Attack(user.BattleStaff, monster);
+                            Console.WriteLine($"Health of monster: {monster.Health}");
                             break;
                        
                         case "5":
-                            break;
-                       
-                        case "6":
-                            userPlay = false;
+                            gameOver = true;
                             Console.WriteLine("Good Bye!");
                             break;
 
@@ -56,12 +60,38 @@ namespace FightGame
                             break;
 
                     }
+                    userTurn = !userTurn;
+                }
+
+                else 
+                {
+                    int num = random.Next(2);
+                   
+                    if (num % 2 == 0)
+                    {
+                        monster.Attack(monster, user);
+                    }
+                    
+                    userTurn = !userTurn;
+                }
+
+                if (user.Health > 0 && monster.Health <= 0)
+                {
+                    gameOver = true;
+                    Console.WriteLine("Congratulations! You have defeated the monster!");
+                }
+
+                else if (monster.Health > 0 && user.Health <= 0)
+                {
+                    gameOver = true;
+                    Console.WriteLine("Game over. You have been defeated!");
                 }
 
                 Console.WriteLine("Return to the main menu");
                 Console.ReadKey();
                 Console.Clear();
 
+           
             } 
         }
     }

@@ -6,7 +6,7 @@ namespace FightGame
 {
     public class Monster
     {
-        public int Health { get; set; }
+        public int Health { get; set; } = 100;
 
         public int MonsterAttack { get; set; }
 
@@ -20,6 +20,7 @@ namespace FightGame
         {
             Console.WriteLine("The Monster Attacks You!\nThe Monster stomps on you and inflicts: " + monster.MonsterAttack);
             user.Health -= monster.MonsterAttack;
+            Console.WriteLine("The health of the user: " + user.Health);
         }
     }
 }
