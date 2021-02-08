@@ -32,7 +32,7 @@ namespace FightGame
                     switch (userChoice)
                     {
                         case "1":
-                            Console.WriteLine("Welcome to... The objective of the game is to use the weapons available to slay the monster. Hope you are ready for a challenge!");
+                            Console.WriteLine("The objective of the game is to use the weapons available to slay the monster. Hope you are ready for a challenge!");
                             break;
                       
                         case "2":
