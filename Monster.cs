@@ -18,7 +18,7 @@ namespace FightGame
 
         public void Attack(Monster monster, User user)
         {
-            Console.WriteLine("The Monster Attacks You!\nThe Monster stomps on you and inflicts: " + monster.MonsterAttack);
+            Console.WriteLine("The Monster Attacks You!\nThe Monster stomps on you and inflicts: " + monster.MonsterAttack + " " + "damage");
             user.Health -= monster.MonsterAttack;
             Console.WriteLine("The health of the user: " + user.Health);
         }
